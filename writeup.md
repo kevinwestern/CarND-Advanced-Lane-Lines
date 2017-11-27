@@ -31,9 +31,15 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ### Pipeline (single images)
 
-#### 1. Provide an example of a distortion-corrected image.
-
 The pipeline I used was the pipelined defined in the class material; I applied camera calibration, camera distortion, image transformation, binary filtering, lane calculation, drawing the lane, the debugging text, and then applying a perspective transform on the inverse matrix. Again, everything defined in the course material. Nothing new.
+
+I experimented with different lane detecting techniques on test images.
+
+RGB Thresholding (in order: R, G, B:
+![rgb thresholding](./writeup_images/rgb_thresholds.png)
+
+HLS Thresholding (in order: H, L, S, L & S:
+![hls thresholding](./writeup_images/hls_thresholding.png)
 
 I found the image perspective numbers through the course forums and through trial and error.
 
@@ -49,7 +55,15 @@ bottom_right_dst = [920, 720]
 bottom_left_dst = [320, 720]
 ```
 
-After applying the pipeline to a test image we can see that everything is working.
+![perspective transform](./writeup_images/perspective_transform.png)
+
+Combining undistortion, binary thresholding and perspective transform, we get the following pipeline:
+
+![pipeline](./writeup_images/pipeline.png)
+
+I used the sliding window technique and the curvature measurement code defined in the course material.
+
+After applying the pipeline to a test image and drawing the lane markings we get the following:
 
 ![lane highlighted](./writeup_images/lane_highlight.png)
 
